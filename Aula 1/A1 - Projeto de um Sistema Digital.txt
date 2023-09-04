@@ -1,0 +1,8 @@
+Objeto escolhido: Calculadora Científica de bolso
+Requisitos: Fazer contas convencionais, com funcionalidades um pouco mais complexas que a calculadora convencional, como: armazenar variáveis, executar funções comumente usadas (trigonométricas, exponenciais, etc), possuir constantes convencionais (pi, e, etc), ser precisa, ser compacta, ter boa bateria, ser intuitiva de usar, ter preço acessível.
+Trade-offs: 
+- Quanto mais funções prontas, mais botões, maior a calculadora, mais confusa de usar.
+- Quanto mais operações incluirmos em um único botão, mais compacta será a calculadora, mas mais confusa de usar.
+- Quanto mais simples o display, menos bateria será gasta, e menor a complexidade do que pode ser exibido na tela.
+- Quanto maior a precisão das operações, maior o poder computacional necessário para operar, maior o consumo energético e maior o tempo para o cálculo. - Quanto mais potente o processador, maior o consumo energético.
+- Quanto maior a qualidade dos coponentes, mais cara será a calculadora.
