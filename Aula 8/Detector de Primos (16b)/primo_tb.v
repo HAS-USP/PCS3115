@@ -12,7 +12,7 @@ module testbench;
 
   // Geração do teste
   initial begin
-    $display("Testando o módulo 'primo' de 0 a 15:");
+    $display("Testando o módulo 'primo' de 0 a 65535:");
     // Casos teste
     for (N = 0; N < 65534; ++N) begin
       #10; // Delay 10 unidades de tempo
