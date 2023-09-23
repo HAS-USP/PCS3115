@@ -59,7 +59,7 @@ module solucao (
     input m, 
     input [31:0] int,
     input [15:0] s, 
-    output wire [1:0] y);
+    output reg [1:0] y);
     // m é a chave geral (sempre da prioridade para o inta, que nesse desafio
     //     corresponde ao int[1:0]).
     // int são os comandos dos interruptores, o vetor está "packed", ou seja, 
@@ -69,6 +69,7 @@ module solucao (
     // y é a saída, note que o int é de 2 bits, então a saída também é.
 
     // Escreva sua solução a partir aqui
+    wire [1:0] y1;
     wire [3:0] cp;
     wire [1:0] mux0;
     input [1:0] a, b, c, d, e, f, g, h, i, j, k, l, mi, n, o, p;
@@ -76,6 +77,9 @@ module solucao (
 
     codpri16_4 uut(s, cp);
     mux16 dut(a, b, c, d, e, f, g, h, i, j, k, l, mi, n, o, p, cp, mux0);
-    muxsimples2 aut(a, mux0, m, y);
+    muxsimples2 aut(a, mux0, m, y1);
+    always @* begin
+        y = y1;
+    end
 
 endmodule
