@@ -65,7 +65,7 @@ always @* begin
                a_en = 1;
                b_en = 0;
                q_en = 1;
-               cnt_en = 0;
+               cnt_en = 1;
                a_ld = 0;
                b_ld = 0;
                q_ld = 0;
