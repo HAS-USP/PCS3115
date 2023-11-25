@@ -22,6 +22,7 @@ always @* begin
                b_ld = 0;
                q_ld = 0;
                cnt_ld = 0;
+               a_rst = 0;
                done = 0;
           end
           EN_LOAD: begin
@@ -33,6 +34,8 @@ always @* begin
                b_ld=1;
                q_ld=1;
                cnt_ld=1;
+               a_rst = 1;
+               done = 0;
           end
           EVAL: begin
                a_en = 0;
@@ -43,17 +46,19 @@ always @* begin
                b_ld = 0;
                q_ld = 0;
                cnt_ld = 0;
+               a_rst = 0;
                done = 0; 
           end
           SUM: begin
-               a_en = 0;
+               a_en = 1;
                b_en = 0;
                q_en = 0;
                cnt_en = 0;
-               a_ld = 0;
+               a_ld = 1;
                b_ld = 0;
                q_ld = 0;
                cnt_ld = 0;
+               a_rst = 0;
                done = 0;    
           end
           SHIFT: begin
@@ -65,6 +70,7 @@ always @* begin
                b_ld = 0;
                q_ld = 0;
                cnt_ld = 0;
+               a_rst = 0;
                done = 0;
           end
           DONE: begin
@@ -76,6 +82,7 @@ always @* begin
                b_ld = 0;
                q_ld = 0;
                cnt_ld = 0;
+               a_rst = 0;
                done = 1;
           end
      endcase
@@ -83,11 +90,7 @@ end
 
      
 always @(posedge clk or posedge rst) begin
-    if (rst) begin
-          a_rst = 1;
-        end
-    end else begin
-        case (state)
+      case (state)
             WAIT: begin
                     if (start)
                          state <= EN_LOAD;
@@ -119,8 +122,8 @@ always @(posedge clk or posedge rst) begin
             default: begin
                 
             end
-        endcase
-    end
+     endcase
+
 end
 
           
