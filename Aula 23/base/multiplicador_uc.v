@@ -78,6 +78,10 @@ always @* begin
                cnt_ld = 0;
                done = 1;
           end
+     endcase
+end
+
+     
 always @(posedge clk or posedge rst) begin
     if (rst) begin
           a_rst = 1;
@@ -86,30 +90,30 @@ always @(posedge clk or posedge rst) begin
         case (state)
             WAIT: begin
                     if (start)
-                         state = EN_LOAD;
+                         state <= EN_LOAD;
                 end
             EN_LOAD: begin
                     
-                         state = EVAL;
+                         state <= EVAL;
                 end
             EVAL: begin
                     if (qlsb)
-                         state = SUM;
+                         state <= SUM;
                     else
-                         state = SHIFT;   
+                         state <= SHIFT;   
             end
             SUM: begin
-                     state = SHIFT;
+                     state <= SHIFT;
             end
             SHIFT: begin
-                      if(z == 1)
-                           state = DONE;
+                 if(zero == 1)
+                           state <= DONE;
                       else
-                           state = EVAL;
+                           state <= EVAL;
             end
             DONE: begin
                       if(~start)
-                           state = WAIT;
+                           state <= WAIT;
                       
             end
             default: begin
