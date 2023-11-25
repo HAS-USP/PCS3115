@@ -65,7 +65,12 @@ module multiplicador_fd
     always @(posedge clk or posedge rst)begin
         if(qlsb)
             q_s = q_b + q_a; 
-
+        if(a_rst)
+            q_s = 0;
+        if(a_ld == 1)
+            q_s = 0;
+        if(cnt_ld == 1)
+            d_count = $clog2(WIDTH)-1;
     end
 
 
