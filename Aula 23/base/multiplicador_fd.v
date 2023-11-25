@@ -11,7 +11,7 @@ module multiplicador_fd
 
     reg [WIDTH-1:0] B_in, Q_in;
     wire [WIDTH-1:0] q_b, q_a, q_s, q_q;
-
+    assign q_s = q_b + q_a;
     shiftr_reg #(parameter WIDTH) reg_B(
         .clk(clk),
         .rst(rst),
@@ -25,7 +25,7 @@ module multiplicador_fd
 
     shiftr_reg #(parameter WIDTH) reg_A(
         .clk(clk),
-        .rst(rst),
+        .rst(a_rst),
         .en(a_en),
         .load(a_ld),
         .si(0),
@@ -45,6 +45,7 @@ module multiplicador_fd
 
     wire [$clog2(WIDTH)-1:0] q_cont, d_cont;
     wire zero;
+    assign d_cont = $clog2(WIDTH)-1
 
     counter_dec #(parameter $clog2(WIDTH)) cont(
         .clk(clk),
@@ -61,22 +62,5 @@ module multiplicador_fd
 
     wire [WIDTH*2-1:0] P_out;
     assign P_out = {q_a, q_q};
-
-    always @(posedge clk or posedge rst)begin
-         
-        
-        if(a_ld == 1) begin
-            if(a_rst)
-                q_s = 0;
-            else if(qlsb)
-                q_s = q_b + q_a;
-        end 
-        if(cnt_ld == 1)
-            d_count = $clog2(WIDTH)-1;
-    end
-
-
-
-
 
 endmodule
