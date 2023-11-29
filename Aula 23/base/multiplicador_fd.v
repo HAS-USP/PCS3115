@@ -9,31 +9,30 @@ module multiplicador_fd
         output [WIDTH*2-1:0] P_out
     );
 
-    reg [WIDTH-1:0] B_in, Q_in;
     wire [WIDTH-1:0] q_b, q_a, q_s, q_q;
     assign q_s = q_b + q_a;
-    shiftr_reg #(parameter WIDTH) reg_B(
+    shiftr_reg #(WIDTH) reg_B(
         .clk(clk),
         .rst(rst),
         .en(b_en),
         .load(b_ld),
-        .si(0),
+        .si(1'b0),
         .d(B_in), 
         .q(q_b)
     );
 
 
-    shiftr_reg #(parameter WIDTH) reg_A(
+    shiftr_reg #(WIDTH) reg_A(
         .clk(clk),
         .rst(a_rst),
         .en(a_en),
         .load(a_ld),
-        .si(0),
+        .si(1'b0),
         .d(q_s),
         .q(q_a)
     );
 
-    shiftr_reg #(parameter WIDTH) reg_Q(
+    shiftr_reg #(WIDTH) reg_Q(
         .clk(clk),
         .rst(rst),
         .en(q_en),
@@ -44,10 +43,9 @@ module multiplicador_fd
     );
 
     wire [$clog2(WIDTH)-1:0] q_cont, d_cont;
-    wire zero;
-    assign d_cont = $clog2(WIDTH)-1
+    assign d_cont = WIDTH-1;
 
-    counter_dec #(parameter $clog2(WIDTH)) cont(
+    counter_dec #($clog2(WIDTH)) cont(
         .clk(clk),
         .rst(rst), 
         .en(cnt_en),
@@ -57,10 +55,7 @@ module multiplicador_fd
         .z(zero)
     );
 
-    wire qlsb;
     assign qlsb = q_q[0];
-
-    wire [WIDTH*2-1:0] P_out;
     assign P_out = {q_a, q_q};
 
 endmodule
